@@ -50,7 +50,11 @@ It's provides as Obsidian extencion, you also can donwload additional fronted fo
 git clone https://github.com/AlekseiSDev/mindminer.git
 cd mindminer
 pip install -r requirements.txt
-python main.py
+uvicorn main:app --reload
+```
+
+```bash
+curl -X POST "http://127.0.0.1:8000/ask" -H "Content-Type: application/json" -d '{"question": "Расскажи о винах Грузии?"}'
 ```
 
 ## Contacts
