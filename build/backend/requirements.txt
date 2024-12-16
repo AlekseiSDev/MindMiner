@@ -1,0 +1,13 @@
+langchain
+langchain_community
+langchain_qdrant
+langchain_groq
+markdown
+unstructured
+FlagEmbedding
+nltk
+langchain-text-splitters
+fastapi
+pydantic
+uvicorn
+pydantic-settings

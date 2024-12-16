@@ -1,0 +1,45 @@
+services:
+  qdrant:
+    container_name: qdrant
+    image: qdrant/qdrant:latest
+    environment:
+      - QDRANT__TELEMETRY_DISABLED=true
+    volumes:
+      - ./qdrant_data:/qdrant/storage
+
+  initializer:
+    container_name: initializer
+    build:
+      dockerfile: build/init/Dockerfile
+      context: .
+    image: initializer
+    env_file:
+      - "app/.env"
+    depends_on:
+      qdrant:
+        condition: service_started
+
+  backend:
+    container_name: backend
+    build: 
+      dockerfile: build/backend/Dockerfile
+    image: backend
+    env_file:
+      - "app/.env"
+    depends_on:
+      initializer:
+        condition: service_completed_successfully
+
+  frontend:
+    container_name: frontend
+    build: 
+      dockerfile: build/frontend/Dockerfile
+    image: frontend
+    env_file:
+      - "app/.env"
+    ports:
+      - "80:8501"
+    depends_on:
+      backend:
+        condition: service_started
+
