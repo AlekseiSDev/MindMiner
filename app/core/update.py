@@ -12,7 +12,7 @@ from uuid import uuid4
 from core.settings import settings
 from core.embeddings import bgem3
 
-qdrant = QdrantClient(settings.qdrant_host)
+qdrant = QdrantClient(str(settings.qdrant_host))
 md_splitter = MarkdownTextSplitter(chunk_size=1000, chunk_overlap=200)
 
 

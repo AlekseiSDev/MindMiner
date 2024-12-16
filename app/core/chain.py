@@ -26,7 +26,7 @@ template = ChatPromptTemplate(
 llm = ChatGroq(
     model="gemma2-9b-it",
     max_tokens=2048,
-    http_client=Client(proxy=settings.proxy),
+    http_client=Client(proxy=str(settings.proxy)),
 )
 
 rag_chain = (

@@ -7,7 +7,7 @@ qvs = QdrantVectorStore.from_existing_collection(
     vector_name="text-dense",
     sparse_embedding=bgem3_sparse,
     sparse_vector_name="text-sparse",
-    location=settings.qdrant_host,
+    location=str(settings.qdrant_host),
     collection_name=settings.collection_name,
     retrieval_mode=RetrievalMode.HYBRID,
 )
