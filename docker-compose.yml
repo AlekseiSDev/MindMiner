@@ -43,3 +43,11 @@ services:
       backend:
         condition: service_started
 
+  # proxy:
+  #   container_name: proxy
+  #   image: chainguard/shadowsocks-rust-sslocal:latest
+  #   restart: always
+  #   ports:
+  #     - 1080:1080
+  #   volumes:
+  #     - ./config.json:/etc/shadowsocks-rust/config.json
