@@ -1,3 +1,4 @@
 app/.env
 qdrant_data
-proxy-config.json
+qdrant_data_0
+config.json
