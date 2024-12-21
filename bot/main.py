@@ -104,7 +104,7 @@ async def handle_question(message: types.Message, state: FSMContext):
     await message.answer("Обрабатываю ваш запрос...")
     answer = await get_answer(user_question, model_choice)
     await message.answer(answer)
-    await state.clear()
+    await state.set_state(None) # Сбрасываем состояние waiting_for_question
 
 
 
