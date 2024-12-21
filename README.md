@@ -9,10 +9,11 @@ It's provides as Obsidian extencion, you also can donwload additional fronted fo
     - api
     - core
 - bot
-- build
+- builds
     - backend
     - frontend
     - init
+    - bot
 - data
 - research
 
@@ -55,39 +56,14 @@ It's provides as Obsidian extencion, you also can donwload additional fronted fo
     git clone https://github.com/AlekseiSDev/MindMiner.git
     cd MindMiner
     ```
-2. Create the .env and config.json files and fill them out based on the provided examples ([app/.env.example](app/.env.example) and [config_example.json](config_example.json)).
+2. Create the .env and config.json files and fill them out based on the provided examples ([app/.env.example](app/.env.example), [bot/.env.example](bot/.env.example) and [config_example.json](config_example.json)).
 
-3. Install the required dependencies:
-
-    Using pip:
-    ```bash
-    pip install -r requirements.txt
-    ```
-    Or using poetry:
-    ```bash
-    poetry install
-    ```
-
-4. Build and start the Docker containers:
+3. Build and start the Docker containers:
     ```
     docker compose up --build -d
     ```
 
-5. Visit the application at http://localhost:80.
-
-#### Running Tg-Bot
-
-1.  Create the .env file and fill it out based on the provided [bot/.env.example](bot/.env.example).
-
-2. Run it:
-    ```bash
-    cd bot
-    ```
-
-    ```python
-    python main.py
-    ```
-
+4. Visit the application at http://localhost:80.
 
 ## Contacts
 [Aleksey Stepin](https://github.com/AlekseiSDev)      

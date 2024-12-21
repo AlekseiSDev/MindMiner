@@ -1,6 +1,6 @@
 FROM python:3.11-slim-buster
 
-COPY build/frontend/requirements.txt requirements.txt
+COPY builds/frontend/requirements.txt requirements.txt
 RUN pip install -r requirements.txt
 
 COPY /app/streamlit_app.py /app/streamlit_app.py

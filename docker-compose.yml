@@ -10,7 +10,7 @@ services:
   initializer:
     container_name: initializer
     build:
-      dockerfile: build/init/Dockerfile
+      dockerfile: builds/init/Dockerfile
       context: .
     image: initializer
     env_file:
@@ -22,7 +22,7 @@ services:
   backend:
     container_name: backend
     build: 
-      dockerfile: build/backend/Dockerfile
+      dockerfile: builds/backend/Dockerfile
     image: backend
     env_file:
       - "app/.env"
@@ -35,7 +35,7 @@ services:
   frontend:
     container_name: frontend
     build: 
-      dockerfile: build/frontend/Dockerfile
+      dockerfile: builds/frontend/Dockerfile
     image: frontend
     env_file:
       - "app/.env"
@@ -52,3 +52,14 @@ services:
     volumes:
       - ./config.json:/config.json
     command: ["ss-local", "-c", "config.json"]
+
+  tgbot:
+    container_name: tgbot
+    build: 
+      dockerfile: builds/bot/Dockerfile
+    image: bot
+    env_file:
+      - "bot/.env"
+    depends_on:
+      backend:
+        condition: service_started
