@@ -21,6 +21,8 @@ nltk = "^3.9.1"
 langchain-openai = "^0.2.12"
 uvicorn = "^0.34.0"
 langchain-gigachat = "^0.3.2"
+pydantic = "^2.9.0"
+aiogram = "^3.15.0"
 
 
 [tool.poetry.group.dev.dependencies]
@@ -29,7 +31,7 @@ pre-commit = "^3.7.1"
 mypy = "^1.10.0"
 types-requests = "^2.32.0.20240602"
 ipykernel = "^6.29.5"
-pydantic = {extras = ["mypy"], version = "^2.10.4"}
+pydantic = {extras = ["mypy"], version = "^2.9.0"}
 
 [tool.ruff]
 line-length = 100

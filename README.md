@@ -41,11 +41,13 @@ It's provides as Obsidian extencion, you also can donwload additional fronted fo
 
 ## 🛠 Technology Stack
 - **Language**: Python
-- **Frameworks**: FastAPI, LangChain, FlagEmbedding
+- **Frameworks**: FastAPI, Aiogram, LangChain, FlagEmbedding
 - **Vector DB**: Qdrant
 - **Frontend**: Streamlit and Tg-Bot
 
 ## Getting Started
+
+#### Running RAG
 
 1. Clone the repository
     ```bash
@@ -71,6 +73,20 @@ It's provides as Obsidian extencion, you also can donwload additional fronted fo
     ```
 
 5. Visit the application at http://localhost:80.
+
+#### Running Tg-Bot
+
+1.  Create the .env file and fill it out based on the provided [bot/.env.example](bot/.env.example).
+
+2. Run it:
+    ```bash
+    cd bot
+    ```
+
+    ```python
+    python main.py
+    ```
+
 
 ## Contacts
 [Aleksey Stepin](https://github.com/AlekseiSDev)      

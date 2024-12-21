@@ -26,6 +26,8 @@ services:
     image: backend
     env_file:
       - "app/.env"
+    ports:
+      - "8000:8000"
     depends_on:
       initializer:
         condition: service_completed_successfully
