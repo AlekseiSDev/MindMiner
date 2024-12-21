@@ -1,12 +1,13 @@
-from pydantic_settings import BaseSettings, SettingsConfigDict
-from pydantic import Field, AnyUrl, HttpUrl
 from typing import Optional
+
+from pydantic import AnyUrl, Field, HttpUrl
+from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
 class Settings(BaseSettings):
     groq_api_key: str = Field(alias="GROQ_API_KEY")
     giga_api_key: str = Field(alias="GIGA_API_KEY")
-    
+
     proxy: Optional[AnyUrl] = None
 
     qdrant_host: HttpUrl

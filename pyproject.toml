@@ -29,6 +29,7 @@ pre-commit = "^3.7.1"
 mypy = "^1.10.0"
 types-requests = "^2.32.0.20240602"
 ipykernel = "^6.29.5"
+pydantic = {extras = ["mypy"], version = "^2.10.4"}
 
 [tool.ruff]
 line-length = 100
@@ -36,7 +37,7 @@ target-version = "py311"
 exclude = [".venv", "venv", "tests", "research", "qdrant_data"]
 
 [tool.ruff.lint]
-ignore = ["RUF002", "RUF003", "T201", "ERA001", "FBT002", "FBT001", "A001", "C901", "S403", "S301", "RUF001"]
+ignore = ["RUF002", "RUF003", "T201", "ERA001", "FBT002", "FBT001", "A001", "C901", "S403", "S301", "RUF001",  "BLE001"]
 fixable = ["I", "B", "RUF", "F"]
 select = [
     "I",     # Isort rules
@@ -63,6 +64,7 @@ preview = true
 
 [tool.mypy]
 exclude = [".venv", "tests", "research", "data"]
+plugins = ["pydantic.mypy"]
 
 [build-system]
 requires = ["poetry-core"]

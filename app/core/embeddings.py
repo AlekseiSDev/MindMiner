@@ -1,4 +1,5 @@
 from FlagEmbedding import BGEM3FlagModel
+
 from core.bge import BGEM3Embedding
 
 bgem3 = BGEM3FlagModel("BAAI/bge-m3", device="cuda", normalize_embeddings=True)

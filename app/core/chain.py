@@ -2,15 +2,15 @@ from dotenv import load_dotenv
 
 load_dotenv(".env")
 
-from langchain_groq.chat_models import ChatGroq
-from langchain_gigachat import GigaChat
+from httpx import Client
+from langchain_core.output_parsers import StrOutputParser
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.runnables import RunnablePassthrough
-from langchain_core.output_parsers import StrOutputParser
-from httpx import Client
+from langchain_gigachat import GigaChat
+from langchain_groq.chat_models import ChatGroq
 
-from core.qdrant import qvs
 from core.format import format_docs
+from core.qdrant import qvs
 from core.settings import settings
 
 retriever = qvs.as_retriever(search_type="similarity", search_kwargs={"k": 5})

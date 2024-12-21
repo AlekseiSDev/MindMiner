@@ -1,11 +1,11 @@
-import uvicorn
-from fastapi import FastAPI, HTTPException, Query
 from typing import Annotated, List
 
+import uvicorn
+from api.schemas import Document, LLMAnswer
 from core.chain import get_rag_chain
-from core.update import update_collection
 from core.settings import settings
-from api.schemas import LLMAnswer, Document
+from core.update import update_collection
+from fastapi import FastAPI, HTTPException, Query
 
 app = FastAPI()
 
@@ -20,8 +20,8 @@ async def generate_answer(
         return LLMAnswer(answer=answer_text)
     except Exception as e:
         raise HTTPException(
-            status_code=500, detail=f"Error generating answer: {str(e)}"
-        )
+            status_code=500, detail=f"Error generating answer: {e!s}"
+        ) from e
 
 
 @app.post("/update")
@@ -31,4 +31,4 @@ def update_database(docs: List[Document]):
 
 
 if __name__ == "__main__":
-    uvicorn.run(app, host=settings.fastapi_host.host, port=settings.fastapi_host.port)
+    uvicorn.run(app, host=settings.fastapi_host.host, port=settings.fastapi_host.port) # type: ignore

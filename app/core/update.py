@@ -1,16 +1,17 @@
-from langchain.text_splitter import MarkdownTextSplitter
+from uuid import uuid4
 
+from langchain.text_splitter import MarkdownTextSplitter
 from qdrant_client import QdrantClient
 from qdrant_client.models import (
-    PointStruct,
-    Filter,
     FieldCondition,
+    Filter,
     MatchValue,
+    PointStruct,
     SparseVector,
 )
-from uuid import uuid4
-from core.settings import settings
+
 from core.embeddings import bgem3
+from core.settings import settings
 
 qdrant = QdrantClient(str(settings.qdrant_host))
 md_splitter = MarkdownTextSplitter(chunk_size=1000, chunk_overlap=200)

@@ -1,9 +1,9 @@
-from langchain_core.embeddings import Embeddings
-from pydantic import BaseModel, Field
 from typing import Any, Dict
-from FlagEmbedding import BGEM3FlagModel
 
+from FlagEmbedding import BGEM3FlagModel
+from langchain_core.embeddings import Embeddings
 from langchain_qdrant.sparse_embeddings import SparseVector
+from pydantic import BaseModel, Field
 
 
 class BGEM3Embedding(BaseModel, Embeddings):

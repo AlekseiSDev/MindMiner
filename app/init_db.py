@@ -1,17 +1,18 @@
-from qdrant_client.models import (
-    VectorParams,
-    SparseVectorParams,
-    SparseIndexParams,
-    Distance,
-    PointStruct,
-)
-from qdrant_client import QdrantClient
 import pickle
 import time
+from pathlib import Path
 
 from core.settings import settings
+from qdrant_client import QdrantClient
+from qdrant_client.models import (
+    Distance,
+    PointStruct,
+    SparseIndexParams,
+    SparseVectorParams,
+    VectorParams,
+)
 
-data = pickle.load(open(r"../data/dump.pickle", "rb"))
+data = pickle.load(Path("../data/dump.pickle").open("rb"))
 
 time.sleep(15)
 
