@@ -8,6 +8,7 @@ It's provides as Obsidian extencion, you also can donwload additional fronted fo
 - app
     - api
     - core
+- bot
 - build
     - backend
     - frontend
