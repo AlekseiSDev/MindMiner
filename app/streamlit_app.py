@@ -4,10 +4,13 @@ from core.settings import settings
 
 q = st.text_input("Ваш вопрос")
 
+model_choice = st.selectbox("Выберите модель:", ["ChatGroq", "GigaChat"])
+
 if st.button("Найти"):
     try:
         ans = requests.get(
-            str(settings.fastapi_host) + "ask", params={"user_question": q}
+            str(settings.fastapi_host) + "ask", 
+            params={"user_question": q, "model": model_choice}
         ).json()["answer"]
         st.markdown(ans)
     except Exception as e:

@@ -24,19 +24,27 @@ template = ChatPromptTemplate(
     ]
 )
 
-# TODO: CHECK GIGACHAT: PROXY?
+def get_llm(model_name: str = "ChatGroq"):
+    if model_name == "ChatGroq":
+        return ChatGroq(
+            model="gemma2-9b-it",
+            max_tokens=2048,
+            http_client=Client(proxy=str(settings.proxy)),
+        )
+    elif model_name == "GigaChat":
+        return GigaChat(
+            model="GigaChat-Pro",
+            credentials=str(settings.giga_api_key),
+            timeout=30,
+            verify_ssl_certs=False
+        )
+    else:
+        raise ValueError(f"Model {model_name} is not supported.")
 
-# llm = ChatGroq(
-#     model="gemma2-9b-it",
-#     max_tokens=2048,
-#     http_client=Client(proxy=str(settings.proxy)),
-# )
-
-llm = GigaChat( model="GigaChat-Pro", credentials=str(settings.api_key), timeout=30, verify_ssl_certs=False) # model="GigaChat-Pro",
-
-rag_chain = (
-    {"context": retriever | format_docs, "question": RunnablePassthrough()}
-    | template
-    | llm
-    | StrOutputParser()
-)
+def get_rag_chain(llm: str = "ChatGroq"):
+    return (
+        {"context": retriever | format_docs, "question": RunnablePassthrough()}
+        | template
+        | get_llm(llm)
+        | StrOutputParser()
+    )

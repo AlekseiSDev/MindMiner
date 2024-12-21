@@ -1,21 +1,21 @@
 import uvicorn
-
 from fastapi import FastAPI, HTTPException, Query
 from typing import Annotated, List
 
-from core.chain import rag_chain
+from core.chain import get_rag_chain
 from core.update import update_collection
 from core.settings import settings
 from api.schemas import LLMAnswer, Document
 
 app = FastAPI()
 
-
 @app.get("/ask", response_model=LLMAnswer)
 async def generate_answer(
     user_question: Annotated[str, Query(description="Вопрос пользователя")],
+    model: Annotated[str, Query(description="Модель для ответа")] = "ChatGroq"
 ):
     try:
+        rag_chain = get_rag_chain(model)
         answer_text = rag_chain.invoke(user_question, verbose=True)
         return LLMAnswer(answer=answer_text)
     except Exception as e:
