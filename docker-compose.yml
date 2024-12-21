@@ -43,3 +43,10 @@ services:
       backend:
         condition: service_started
 
+  proxy:
+    container_name: proxy
+    image: shadowsocks/shadowsocks-libev:edge
+    restart: always
+    volumes:
+      - ./config.json:/config.json
+    command: ["ss-local", "-c", "config.json"]

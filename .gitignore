@@ -169,3 +169,5 @@ cython_debug/
 
 app/.env
 qdrant_data
+qdrant_data_0
+config.json
