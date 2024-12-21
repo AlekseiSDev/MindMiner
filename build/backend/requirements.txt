@@ -11,3 +11,5 @@ fastapi
 pydantic
 uvicorn
 pydantic-settings
+socksio
+langchain-gigachat

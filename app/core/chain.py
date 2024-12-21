@@ -3,6 +3,7 @@ from dotenv import load_dotenv
 load_dotenv(".env")
 
 from langchain_groq.chat_models import ChatGroq
+from langchain_gigachat import GigaChat
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.runnables import RunnablePassthrough
 from langchain_core.output_parsers import StrOutputParser
@@ -23,11 +24,15 @@ template = ChatPromptTemplate(
     ]
 )
 
-llm = ChatGroq(
-    model="gemma2-9b-it",
-    max_tokens=2048,
-    http_client=Client(proxy=str(settings.proxy)),
-)
+# TODO: CHECK GIGACHAT: PROXY?
+
+# llm = ChatGroq(
+#     model="gemma2-9b-it",
+#     max_tokens=2048,
+#     http_client=Client(proxy=str(settings.proxy)),
+# )
+
+llm = GigaChat( model="GigaChat-Pro", credentials=str(settings.api_key), timeout=30, verify_ssl_certs=False) # model="GigaChat-Pro",
 
 rag_chain = (
     {"context": retriever | format_docs, "question": RunnablePassthrough()}
