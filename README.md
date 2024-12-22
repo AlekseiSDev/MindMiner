@@ -5,14 +5,17 @@ MindMiner is an advanced RAG (Retrieval-Augmented Generation) system designed to
 It's provides as Obsidian extencion, you also can donwload additional fronted for it, like tg-bot
 
 ## Structure
+- app
+    - api
+    - core
+- bot
+- builds
+    - backend
+    - frontend
+    - init
+    - bot
 - data
-- backend
-- frontend
-    - tg-bot
-    - obsidian_exntension
 - research
-    -lesha
-    -rustam
 
 
 
@@ -40,23 +43,29 @@ It's provides as Obsidian extencion, you also can donwload additional fronted fo
 
 ## 🛠 Technology Stack
 - **Language**: Python
-- **Frameworks**: FastAPI, OpenAI, LangChain?, LamaIndex
-- **Core LLM**: OpenAI's GPT
-- **Database**: Likely document-oriented or a basic PostgreSQL setup
-- **Frontend**: Obsidian and tg-bot(probably PyTelegrammBotApi)
+- **Frameworks**: FastAPI, Aiogram, LangChain, FlagEmbedding
+- **Vector DB**: Qdrant
+- **Frontend**: Streamlit and Tg-Bot
 
 ## Getting Started
-```bash
-git clone https://github.com/AlekseiSDev/mindminer.git
-cd mindminer
-pip install -r requirements.txt
-uvicorn main:app --reload
-```
 
-```bash
-curl -X POST "http://127.0.0.1:8000/ask" -H "Content-Type: application/json" -d '{"question": "Расскажи о винах Грузии?"}'
-```
+#### Running RAG
+
+1. Clone the repository
+    ```bash
+    git clone https://github.com/AlekseiSDev/MindMiner.git
+    cd MindMiner
+    ```
+2. Create the .env and config.json files and fill them out based on the provided examples ([app/.env.example](app/.env.example), [bot/.env.example](bot/.env.example) and [config_example.json](config_example.json)).
+
+3. Build and start the Docker containers:
+    ```
+    docker compose up --build -d
+    ```
+
+4. Visit the application at http://localhost:80.
 
 ## Contacts
-akirusprod@gmail.com   
-alekseystepin13@gmail.com
+[Aleksey Stepin](https://github.com/AlekseiSDev)      
+[Nikita Safonov](https://github.com/sixxio)       
+[Rustam Akimov](https://github.com/AkiRusProd)
