@@ -5,6 +5,7 @@ RUN pip install -r requirements.txt
 
 COPY /app/streamlit_app.py /app/streamlit_app.py
 COPY /app/core/settings.py /app/core/settings.py
+COPY /app/core/instruction.py /app/core/instruction.py
 
 EXPOSE 8501
 
