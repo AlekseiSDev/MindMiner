@@ -11,11 +11,12 @@ app = FastAPI()
 
 @app.get("/ask", response_model=LLMAnswer)
 async def generate_answer(
-    user_question: Annotated[str, Query(description="Вопрос пользователя")],
-    model: Annotated[str, Query(description="Модель для ответа")] = "ChatGroq"
+    user_question: Annotated[str, Query(description="User's question")],
+    model: Annotated[str, Query(description="Model Instance to use for generating the answer")] = "ChatGroq",
+    top_k: Annotated[int, Query(ge=1, le=10, description="Number of top results to retrieve (1-10)")] = 5
 ):
     try:
-        rag_chain = get_rag_chain(model)
+        rag_chain = get_rag_chain(model, top_k=top_k)
         answer_text = rag_chain.invoke(user_question, verbose=True)
         return LLMAnswer(answer=answer_text)
     except Exception as e:

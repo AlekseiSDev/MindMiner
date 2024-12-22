@@ -4,6 +4,8 @@ services:
     image: qdrant/qdrant:latest
     environment:
       - QDRANT__TELEMETRY_DISABLED=true
+    ports:
+      - "6333:6333"
     volumes:
       - ./qdrant_data:/qdrant/storage
 

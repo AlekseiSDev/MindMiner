@@ -41,7 +41,9 @@ def get_llm(model_name: str = "ChatGroq"):
     else:
         raise ValueError(f"Model {model_name} is not supported.")
 
-def get_rag_chain(llm: str = "ChatGroq"):
+def get_rag_chain(llm: str = "ChatGroq", top_k: int = 5):
+    retriever.search_kwargs = {"k": top_k}
+
     return (
         {"context": retriever | format_docs, "question": RunnablePassthrough()}
         | template
