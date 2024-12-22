@@ -1,7 +1,7 @@
 import re
 import requests
 import streamlit as st
-from core.instruction import default_instruction
+from core.instruction import default_instruction, custom_instructions
 from core.settings import settings
 
 q = st.text_input("Ваш вопрос")
@@ -11,9 +11,29 @@ model_choice = st.selectbox("Выберите модель:", ["ChatGroq", "Giga
 top_k = st.slider("Количество результатов (top_k):", min_value=1, max_value=10, value=5)
 
 use_default_instruction = st.checkbox("Использовать системную инструкцию по умолчанию", value=True)
+
+templates = [{"name": name, "instruction": instruction} for name, instruction in custom_instructions.items()]
+
+# Перемещаем выбор шаблонов в сайдбар
+selected_template_idx = st.sidebar.radio("Выберите шаблон инструкции", options=[template["name"] for template in templates])
+
+# Проверяем, если в session_state еще нет значения, то создаем
+if "custom_instruction" not in st.session_state:
+    st.session_state.custom_instruction = ""
+
+# Сначала обновляем значение custom_instruction, если выбрали новый шаблон
+if selected_template_idx:
+    selected_template = next(template["instruction"] for template in templates if template["name"] == selected_template_idx)
+    if not use_default_instruction:  # Если пользователь не выбрал системную инструкцию
+        st.session_state.custom_instruction = selected_template
+    else:
+        st.session_state.custom_instruction = ""
+
 custom_instruction = st.text_area(
-    "Кастомная инструкция (будет игнорироваться, если выбрана системная инструкция)", 
-    placeholder="Введите свою инструкцию здесь..."
+    "Кастомная инструкция (будет игнорироваться, если выбрана системная инструкция)",
+    value=st.session_state.custom_instruction if not use_default_instruction else "",
+    placeholder="Введите свою инструкцию здесь...",
+    height=200
 )
 
 def is_valid_instruction(instruction: str) -> bool:
