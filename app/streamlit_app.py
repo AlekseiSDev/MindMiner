@@ -6,11 +6,13 @@ q = st.text_input("Ваш вопрос")
 
 model_choice = st.selectbox("Выберите модель:", ["ChatGroq", "GigaChat"])
 
+top_k = st.slider("Количество результатов (top_k):", min_value=1, max_value=10, value=5)
+
 if st.button("Найти"):
     try:
         ans = requests.get(
             str(settings.fastapi_host) + "ask", 
-            params={"user_question": q, "model": model_choice},
+            params={"user_question": q, "model": model_choice, "top_k": top_k},
             timeout=10
         ).json()["answer"]
         st.markdown(ans)

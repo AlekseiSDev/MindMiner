@@ -16,7 +16,7 @@ data = pickle.load(Path("../data/dump.pickle").open("rb"))
 
 time.sleep(15)
 
-qc = QdrantClient(str(settings.qdrant_host))
+qc = QdrantClient(str(settings.qdrant_host), timeout=60)
 
 if not qc.collection_exists(settings.collection_name):
     qc.create_collection(
