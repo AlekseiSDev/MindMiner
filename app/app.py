@@ -3,6 +3,7 @@ from typing import Annotated, List
 import uvicorn
 from api.schemas import Document, LLMAnswer
 from core.chain import get_rag_chain
+from core.instruction import default_instruction
 from core.settings import settings
 from core.update import update_collection
 from fastapi import FastAPI, HTTPException, Query
@@ -13,10 +14,11 @@ app = FastAPI()
 async def generate_answer(
     user_question: Annotated[str, Query(description="User's question")],
     model: Annotated[str, Query(description="Model Instance to use for generating the answer")] = "ChatGroq",
-    top_k: Annotated[int, Query(ge=1, le=10, description="Number of top results to retrieve (1-10)")] = 5
+    top_k: Annotated[int, Query(ge=1, le=10, description="Number of top results to retrieve (1-10)")] = 5,
+    instruction: Annotated[str, Query(description="Custom instruction for the model")] = default_instruction
 ):
     try:
-        rag_chain = get_rag_chain(model, top_k=top_k)
+        rag_chain = get_rag_chain(model, top_k=top_k, instruction=instruction)
         answer_text = rag_chain.invoke(user_question, verbose=True)
         return LLMAnswer(answer=answer_text)
     except Exception as e:

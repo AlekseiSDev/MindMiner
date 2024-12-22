@@ -9,20 +9,12 @@ from langchain_core.runnables import RunnablePassthrough
 from langchain_gigachat import GigaChat
 from langchain_groq.chat_models import ChatGroq
 
+from core.instruction import default_instruction
 from core.format import format_docs
 from core.qdrant import qvs
 from core.settings import settings
 
 retriever = qvs.as_retriever(search_type="similarity", search_kwargs={"k": 5})
-
-template = ChatPromptTemplate(
-    [
-        (
-            "human",
-            "Ты - помощник для ответа на вопросы по базе знаний пользователя. Используй контекст ниже для ответа на вопросы пользователя. Если ты не знаешь ответ на вопрос, так и скажи. В конце ответа указывай список источников (со ссылками), из которых была использована информация. Важно: ответ должен быть на русском языке вне зависимости от языка документа.\n Вопрос пользователя: {question} \n Контекст из базы знаний: {context} \nAnswer:",
-        )
-    ]
-)
 
 def get_llm(model_name: str = "ChatGroq"):
     if model_name == "ChatGroq":
@@ -41,8 +33,17 @@ def get_llm(model_name: str = "ChatGroq"):
     else:
         raise ValueError(f"Model {model_name} is not supported.")
 
-def get_rag_chain(llm: str = "ChatGroq", top_k: int = 5):
+def get_rag_chain(llm: str = "ChatGroq", top_k: int = 5, instruction: str = default_instruction):
     retriever.search_kwargs = {"k": top_k}
+
+    template = ChatPromptTemplate(
+        [
+            (
+                "human",
+                instruction,
+            )
+        ]
+    )
 
     return (
         {"context": retriever | format_docs, "question": RunnablePassthrough()}
