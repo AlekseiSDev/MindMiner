@@ -1,8 +1,7 @@
 import re
+
 import requests
-
 import streamlit as st
-
 from core.instruction import instructions
 from core.settings import settings
 
