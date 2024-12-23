@@ -9,8 +9,8 @@ from langchain_core.runnables import RunnablePassthrough
 from langchain_gigachat import GigaChat
 from langchain_groq.chat_models import ChatGroq
 
-from core.instruction import default_instruction
 from core.format import format_docs
+from core.instruction import default_instruction
 from core.qdrant import qvs
 from core.settings import settings
 
