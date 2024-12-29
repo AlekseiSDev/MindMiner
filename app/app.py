@@ -1,5 +1,6 @@
 from typing import Annotated, List
 
+import mlflow
 import uvicorn
 from api.schemas import Document, LLMAnswer
 from core.chain import get_rag_chain
@@ -7,6 +8,9 @@ from core.instruction import default_instruction
 from core.settings import settings
 from core.update import update_collection
 from fastapi import FastAPI, HTTPException, Query
+
+mlflow.set_experiment("Obsiminers Tracing")
+mlflow.langchain.autolog()
 
 app = FastAPI()
 

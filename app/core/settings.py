@@ -7,6 +7,7 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 class Settings(BaseSettings):
     groq_api_key: str = Field(alias="GROQ_API_KEY")
     giga_api_key: str = Field(alias="GIGA_API_KEY")
+    mistral_api_key: str = Field(alias="MISTRAL_API_KEY")
 
     proxy: Optional[AnyUrl] = None
 
