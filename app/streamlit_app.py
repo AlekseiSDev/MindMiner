@@ -14,13 +14,15 @@ def is_valid_instruction(instruction: str) -> bool:
         is not None
     )
 
+st.set_page_config(page_title='Obsiminers',
+                   page_icon=':robot_face:')
 
 ask_tab, add_tab = st.tabs(["Задать вопрос", "Добавить документ в коллекцию"])
 
 with ask_tab:
     question = st.text_input("Ваш вопрос")
 
-    model_choice = st.selectbox("Выберите модель:", ["ChatGroq", "GigaChat"])
+    model_choice = st.selectbox("Выберите модель:", ["ChatGroq", "GigaChat", "MistralAI"])
 
     top_k = st.slider("Количество результатов (top_k):", min_value=1, max_value=10, value=5)
 
