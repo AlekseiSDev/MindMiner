@@ -24,6 +24,7 @@ with ask_tab:
 
     model_choice = st.selectbox("Выберите модель:", ["ChatGroq", "GigaChat", "MistralAI"])
 
+
     top_k = st.slider("Количество результатов (top_k):", min_value=1, max_value=10, value=5)
 
     instruction_type = st.selectbox("Выберите системный промпт", list(instructions) + ["Кастом"], 0)
